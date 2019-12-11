@@ -1,41 +1,40 @@
-/*package whatever //do not write package name here */
+package optimizationProblems;
 
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.util.Scanner;
 
-class GFG {
-	public static void main (String[] args) {
-    int n=10;
-    int a1[]=new int[5];
-    int a2[]=new int[5];
-	int a3[]=new int[5];
-	int ugly[]=new int[n+1];
-	for(int i=1;i<5;i++){
-	    a1[i]=2*i;
-	    a2[i]=3*i;
-	    a3[i]=5*i;
+public class UglyNumbers {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int testcases = sc.nextInt();
+		while (testcases != 0) {
+			int n = sc.nextInt();
+			int nxt_2=2;
+			int nxt_3=3;
+			int nxt_5=5;
+			int n2=0;
+			int n3=0;
+			int n5=0;
+			int ugly[] = new int[n];
+			ugly[0] = 1;
+			for (int i = 1; i <n; i++) {
+				int minValue=Math.min(nxt_2, Math.min(nxt_3, nxt_5));
+				ugly[i]=minValue;
+				if(minValue==nxt_2) {
+					n2++;
+					nxt_2=ugly[n2]*2;
+				}
+				if(minValue==nxt_3) {
+					n3++;
+					nxt_3=ugly[n3]*3;
+				}
+				if(minValue==nxt_5) {
+					n5++;
+					nxt_5=ugly[n5]*5;
+				}
+			}
+			System.out.println(ugly[n-1]);
+			testcases--;
+		}
+		sc.close();
 	}
-	ugly[0]=1;
-	int a=0,b=0,c=0;
-	for(int i=1;i<=n;i++){
-	   
-	    if(a1[a]<a2[b]){
-	        if(a1[a]<a3[c])
-	         ugly[i]=a1[a++];
-	        else
-	         ugly[i]=a3[c++];
-	    }
-	    else
-	    {
-	        if(a2[b]<a3[c])
-	         ugly[i]=a2[b++];
-	         else
-	         ugly[i]=a3[c++];
-	    }
-	    
-	}
-	System.out.println(ugly[3]);
-	}
-
 }
